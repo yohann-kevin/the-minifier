@@ -29,4 +29,8 @@ const cssMinifier = async () => {
   createCssMinFile(cssMinify);
 };
 
-module.exports = { cssMinifier };
+module.exports = {
+  cssMinifier,
+  cssFormatter,
+  readCssFile,
+};
