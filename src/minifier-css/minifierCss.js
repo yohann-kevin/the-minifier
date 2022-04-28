@@ -26,6 +26,7 @@ function createCssMinFile(cssMinify) {
 const cssMinifier = async () => {
   const css = readCssFile();
   const cssMinify = cssFormatter(css);
+  logger.info(cssMinify);
   createCssMinFile(cssMinify);
 };
 

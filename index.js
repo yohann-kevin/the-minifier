@@ -1,8 +1,9 @@
 const { cssMinifier } = require('./src/minifier-css/minifierCss');
+const { htmlMinifier } = require('./src/minifier-html/minifierHtml');
 
 const functionTest = () => {
-  console.log('hello is kirua');
-  cssMinifier();
+  // cssMinifier();
+  htmlMinifier();
 };
 
 module.exports = { functionTest };
