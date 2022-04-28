@@ -12,7 +12,7 @@ function readHtmlFile() {
 
 function htmlFormatter(htmlContent) {
   const regex = /(\sr\n|\n|\r)/gm;
-  return htmlContent.replace(regex, '').split(' ').filter((elmnt) => elmnt !== '').join('');
+  return htmlContent.replace(regex, '').split('  ').join('');
 }
 
 function createHtmlMinFile(htmlMinify) {
@@ -30,4 +30,8 @@ const htmlMinifier = async () => {
   createHtmlMinFile(htmlMinify);
 };
 
-module.exports = { htmlMinifier };
+module.exports = {
+  htmlMinifier,
+  htmlFormatter,
+  readHtmlFile,
+};
