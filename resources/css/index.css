@@ -11,3 +11,10 @@ body {
     color: blue;
     background-color: red;
 }
+
+section {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}

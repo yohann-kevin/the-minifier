@@ -6,15 +6,18 @@ const {
 } = require('../../src/minifier-css/minifierCss');
 
 describe('Test the css minifier', () => {
+  const filePath = './resources/css/index.css';
+
   let cssFileSample;
   let cssFormatSample;
+
   beforeEach(() => {
-    cssFileSample = fs.readFileSync('./resources/css/index.css', 'utf8');
+    cssFileSample = fs.readFileSync(filePath, 'utf8');
     cssFormatSample = fs.readFileSync('./resources/css/index.min.css', 'utf-8');
   });
 
   it('should test css file reader', () => {
-    const fileRead = readCssFile();
+    const fileRead = readCssFile(filePath);
     expect(fileRead).toBe(cssFileSample);
   });
 

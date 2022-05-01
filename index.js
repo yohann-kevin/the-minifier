@@ -1,11 +1,18 @@
-const { cssMinifier } = require('./src/minifier-css/minifierCss');
+const { cssMinifierSample, cssMinifier } = require('./src/minifier-css/minifierCss');
 const { htmlMinifier } = require('./src/minifier-html/minifierHtml');
 
-const functionTest = () => {
-  // cssMinifier();
-  htmlMinifier();
+const minifier = () => {
+  // cssMinifierSample();
+  // htmlMinifier();
 };
 
-module.exports = { functionTest };
+const minifierCommandLine = (args) => {
+  // console.log(args);
+  if (args.css) {
+    cssMinifier(args.cssPath);
+  }
+};
 
-functionTest();
+module.exports = { minifier, minifierCommandLine };
+
+// minifier();
