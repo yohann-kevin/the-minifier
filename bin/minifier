@@ -1,12 +1,13 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 // -*- js -*-
 
 const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
-const dirTree = require("directory-tree");
+const dirTree = require('directory-tree');
 
 // path for development mode
-const { minifierCommandLine } = require('../index.js');
+const { minifierCommandLine } = require('../index');
 
 const optionList = [
   {
@@ -20,57 +21,72 @@ const optionList = [
     name: 'css',
     alias: 'c',
     type: String,
-    description: '🖌️  Minify all project css'
+    description: '🖌️  Minify all project css',
   },
   {
     name: 'html',
     alias: 'w',
     type: String,
-    description: '🌐 Minify all project html'
+    description: '🌐 Minify all project html',
   },
   {
     name: 'javascript',
     alias: 'j',
     type: String,
-    description: '🚂 Minify all project javascript'
-  }
+    description: '🚂 Minify all project javascript',
+  },
 ];
 
 const usageNotes = [
   {
     header: '🗜️  Minify html, css and javascript',
-    content: 'A light library to minify javascript, css and html easily'
+    content: 'A light library to minify javascript, css and html easily',
   },
   {
     header: '⚙️  Options ⚙️',
-    optionList: optionList
-  }
+    optionList,
+  },
 ];
 
 const usage = commandLineUsage(usageNotes);
+const cssFilesPath = [];
 let options = null;
-let cssFilesPath = [];
 
-try {
-    options = commandLineArgs(optionList);
-} catch(e) {
-  console.log(e);
-  console.log(usage);
-  return;
+/**
+ * search css file in project
+ * @param {array} allPath array of all path in project
+ */
+function searchCssFile(allPath) {
+  allPath.children.forEach((folderAndFiles) => {
+    if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
+      if (Object.keys(folderAndFiles).length === 2) {
+        const filesName = folderAndFiles.name.split('.');
+        const filesExtension = filesName[filesName.length - 1];
+        if (filesExtension === 'css') cssFilesPath.push(folderAndFiles.path);
+      } else {
+        searchCssFile(folderAndFiles);
+      }
+    }
+  });
 }
 
-if (Object.keys(options).length === 0 || options.help) {
-  console.log(usage)
-  return;
-} else {
-  initArgsValue();
+/**
+ * search file path
+ */
+function searchPathFile() {
+  const projectPath = dirTree('./');
+
+  if (options.css) {
+    searchCssFile(projectPath);
+    options.cssPath = cssFilesPath;
+  }
+
+  minifierCommandLine(options);
 }
 
-function initArgsValue() {
-  for (const arg in options) options[arg] = true;
-  manageArgAll();
-}
-
+/**
+ * change all arg for true if all options is active
+ */
 function manageArgAll() {
   if (options.all) {
     options.html = true;
@@ -81,27 +97,37 @@ function manageArgAll() {
   searchPathFile();
 }
 
-function searchPathFile() {
-  const projectPath = dirTree('./');
-
-  if (options.css) {
-    searchCssFile(projectPath);
-    options.cssPath = cssFilesPath;
-  }
-  
-  minifierCommandLine(options);
-}
-
-function searchCssFile(allPath) {
-  allPath.children.forEach((folderAndFiles) => {
-    if (folderAndFiles.name != 'node_modules' && folderAndFiles.name != '.git') {
-      if(Object.keys(folderAndFiles).length == 2) {
-        const filesName = folderAndFiles.name.split('.')
-        const filesExtension = filesName[filesName.length - 1];
-        if (filesExtension === 'css') cssFilesPath.push(folderAndFiles.path);
-      } else {
-        searchCssFile(folderAndFiles);
-      }
+/**
+ * initialize arg null to true
+ */
+function initArgsValue() {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const arg in options) {
+    if ({}.hasOwnProperty.call(options, arg)) {
+      options[arg] = true;
     }
-  });
+  }
+  manageArgAll();
 }
+
+/**
+ * launch and init program
+ * @returns empty if args is empty
+ */
+function init() {
+  try {
+    options = commandLineArgs(optionList);
+  } catch (e) {
+    console.log(e);
+    console.log(usage);
+    return;
+  }
+
+  if (Object.keys(options).length === 0 || options.help) {
+    console.log(usage);
+  } else {
+    initArgsValue();
+  }
+}
+
+init();
