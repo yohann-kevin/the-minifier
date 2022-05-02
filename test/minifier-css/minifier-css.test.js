@@ -3,7 +3,7 @@ const fs = require('fs');
 const {
   cssFormatter,
   readCssFile,
-} = require('../../src/minifier-css/minifierCss');
+} = require('../../src/minifier-css/minifier-css');
 
 describe('Test the css minifier', () => {
   const filePath = './resources/css/index.css';

@@ -3,7 +3,7 @@ const fs = require('fs');
 const {
   htmlFormatter,
   readHtmlFile,
-} = require('../../src/minifier-html/minifierHtml');
+} = require('../../src/minifier-html/minifier-html');
 
 describe('Test the html minifier', () => {
   let htmlFileSample;

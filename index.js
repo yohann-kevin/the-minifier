@@ -1,5 +1,5 @@
-const { cssMinifierSample, cssMinifier } = require('./src/minifier-css/minifierCss');
-const { htmlMinifier } = require('./src/minifier-html/minifierHtml');
+const { cssMinifierSample, cssMinifier } = require('./src/minifier-css/minifier-css');
+const { htmlMinifier } = require('./src/minifier-html/minifier-html');
 
 const minifier = () => {
   // cssMinifierSample();
