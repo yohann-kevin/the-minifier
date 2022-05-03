@@ -35,19 +35,9 @@ function createCssMinFile(cssMinify, filePathAndName) {
     fs.writeFileSync(`${filePathAndName}.min.css`, cssMinify);
   } catch (err) {
     logger.error(err);
+    throw err;
   }
 }
-
-/**
- * sample css minifier
- */
-const cssMinifierSample = () => {
-  const filesPath = './resources/css/index.css';
-  const css = readCssFile(filesPath);
-  const cssMinify = cssFormatter(css);
-  logger.info(cssMinify);
-  createCssMinFile(cssMinify);
-};
 
 /**
  * extract path and name of css file
@@ -74,8 +64,8 @@ const cssMinifier = (cssFilesPath) => {
 };
 
 module.exports = {
-  cssMinifierSample,
   cssFormatter,
+  createCssMinFile,
   readCssFile,
   extractFileName,
   cssMinifier,

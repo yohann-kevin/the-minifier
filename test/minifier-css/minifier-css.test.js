@@ -3,10 +3,12 @@ const fs = require('fs');
 const {
   cssFormatter,
   extractFileName,
+  createCssMinFile,
   readCssFile,
+  cssMinifier,
 } = require('../../src/minifier-css/minifier-css');
 
-describe('Test the css minifier', () => {
+describe('Test unit the css minifier methods', () => {
   const filePath = './resources/css/index.css';
 
   let cssFileSample;
@@ -28,6 +30,19 @@ describe('Test the css minifier', () => {
     }).toThrow();
   });
 
+  it('should test css minfier create min file', () => {
+    const testFilePath = './resources/css/create-min-file';
+    createCssMinFile(cssFormatSample, testFilePath);
+    const checkFileExist = fs.existsSync(`${testFilePath}.min.css`);
+    expect(checkFileExist).toBe(true);
+  });
+
+  it('should test css create min file return error', () => {
+    expect(() => {
+      createCssMinFile();
+    }).toThrow();
+  });
+
   it('should test css Formatter', () => {
     const cssFromat = cssFormatter(cssFileSample);
     expect(cssFromat).toBe(cssFormatSample);
@@ -38,5 +53,13 @@ describe('Test the css minifier', () => {
     const pathWithoutFileExtension = extractFileName(pathWithFileExtension);
     const pathExpected = '/style/index';
     expect(pathWithoutFileExtension).toBe(pathExpected);
+  });
+
+  it('should test css minifier', () => {
+    const pathTestFile = 'resources/css/test.css';
+    const cssContentExpected = fs.readFileSync('./resources/css/test.min.css', 'utf-8');
+    cssMinifier([pathTestFile]);
+    const cssContentAfterMinify = fs.readFileSync('./resources/css/test.min.css', 'utf-8');
+    expect(cssContentAfterMinify).toBe(cssContentExpected);
   });
 });
