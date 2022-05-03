@@ -77,5 +77,6 @@ module.exports = {
   cssMinifierSample,
   cssFormatter,
   readCssFile,
+  extractFileName,
   cssMinifier,
 };
