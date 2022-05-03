@@ -22,7 +22,7 @@ function readCssFile(filesPath) {
  */
 function cssFormatter(cssContent) {
   const regex = /(\sr\n|\n|\r)/gm;
-  return cssContent.replace(regex, '').split(' ').filter((elmnt) => elmnt !== '').join('');
+  return cssContent.replace(regex, '').split('  ').filter((elmnt) => elmnt !== '').join('');
 }
 
 /**

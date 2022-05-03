@@ -23,18 +23,18 @@ const optionList = [
     type: String,
     description: '🖌️  Minify all project css',
   },
-  {
-    name: 'html',
-    alias: 'w',
-    type: String,
-    description: '🌐 Minify all project html',
-  },
-  {
-    name: 'javascript',
-    alias: 'j',
-    type: String,
-    description: '🚂 Minify all project javascript',
-  },
+  // {
+  //   name: 'html',
+  //   alias: 'w',
+  //   type: String,
+  //   description: '🌐 Minify all project html',
+  // },
+  // {
+  //   name: 'javascript',
+  //   alias: 'j',
+  //   type: String,
+  //   description: '🚂 Minify all project javascript',
+  // },
 ];
 
 const usageNotes = [

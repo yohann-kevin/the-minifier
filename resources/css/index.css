@@ -27,3 +27,12 @@ article {
   flex-wrap: wrap;
   background-color: aqua;
 }
+
+article > div {
+  border:1px solid black;
+}
+
+.login #preferance {
+  width: 50%;
+  margin: 0auto;
+}

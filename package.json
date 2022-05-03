@@ -1,7 +1,8 @@
 {
   "name": "the-minifier",
-  "version": "1.0.2",
-  "description": "(WIP) the minifier",
+  "version": "1.0.3",
+  "description": "A light library to minify css easily",
+  "keywords": ["minify", "css"],
   "main": "index.js",
   "scripts": {
     "lint": "npx eslint index.js",
@@ -10,8 +11,16 @@
   "bin": {
     "the-minifier": "bin/minifier"
   },
-  "author": "",
+  "author": "PERRIGUEY Yohann <yo44prg@icoud.com> (https://github.com/yohann-kevin)",
   "license": "ISC",
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/yohann-kevin/the-minifier.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yohann-kevin/the-minifier/issues"
+  },
+  "homepage": "https://github.com/yohann-kevin/the-minifier#readme",
   "devDependencies": {
     "eslint": "^8.14.0",
     "eslint-config-airbnb-base": "^15.0.0",
