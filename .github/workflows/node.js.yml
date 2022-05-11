@@ -34,8 +34,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: paambaati/codeclimate-action@v3.0.0
-    env:
-      CC_TEST_REPORTER_ID: <code_climate_reporter_id>
-    with:
-      coverageCommand: npm run coverage
-      debug: true
+      env:
+        CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+      with:
+        coverageCommand: npm run coverage
+        debug: true
