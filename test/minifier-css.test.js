@@ -6,7 +6,7 @@ const {
   createCssMinFile,
   readCssFile,
   cssMinifier,
-} = require('../../src/minifier-css/minifier-css');
+} = require('../src/minifier-css');
 
 describe('Test unit the css minifier methods', () => {
   const filePath = './resources/css/index.css';

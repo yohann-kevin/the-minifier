@@ -5,7 +5,7 @@ const {
   readHtmlFile,
   createHtmlMinFile,
   extractFileName,
-} = require('../../src/minifier-html/minifier-html');
+} = require('../src/minifier-html');
 
 describe('Test the html minifier', () => {
   const filePath = './resources/html/index.html';
