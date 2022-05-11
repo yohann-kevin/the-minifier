@@ -28,13 +28,6 @@ describe('Test the html minifier', () => {
     }).toThrow();
   });
 
-  it('should test html minfier create min file', () => {
-    const testFilePath = './resources/html/create-min-file';
-    createHtmlMinFile(htmlFormatSample, testFilePath);
-    const checkFileExist = fs.existsSync(`${testFilePath}.min.html`);
-    expect(checkFileExist).toBe(true);
-  });
-
   it('should test html create min file return error', () => {
     expect(() => {
       createHtmlMinFile();

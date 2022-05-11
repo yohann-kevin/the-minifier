@@ -1,7 +1,7 @@
 const fs = require('fs');
 const logger = require('pino')();
 
-const { extractFileName } = require('./utils');
+const { extractFileName, createMinFile } = require('./utils');
 
 /**
  * read css file with file path
@@ -28,31 +28,6 @@ function cssFormatter(cssContent) {
 }
 
 /**
- * create new file.min.css
- * @param {string} cssMinify css content minify
- * @param {*} filePathAndName path and name of file
- */
-function createCssMinFile(cssMinify, filePathAndName) {
-  try {
-    fs.writeFileSync(`${filePathAndName}.min.css`, cssMinify);
-  } catch (err) {
-    logger.error(err);
-    throw err;
-  }
-}
-
-/**
- * extract path and name of css file
- * @param {string} path path of css file
- * @returns {string} path and name of css file without extension
- */
-// const extractFileName = (path) => {
-//   const pathSplited = path.split('.');
-//   pathSplited.pop();
-//   return pathSplited[0];
-// };
-
-/**
  * chore function of css minifier
  * @param {Array} cssFilesPath path of css files in project
  */
@@ -61,13 +36,13 @@ const cssMinifier = (cssFilesPath) => {
     const filePathAndName = extractFileName(filePath);
     const css = readCssFile(filePath);
     const cssMinify = cssFormatter(css);
-    createCssMinFile(cssMinify, filePathAndName);
+    const fileExtension = '.css';
+    createMinFile(cssMinify, filePathAndName, fileExtension);
   });
 };
 
 module.exports = {
   cssFormatter,
-  createCssMinFile,
   readCssFile,
   cssMinifier,
 };

@@ -29,13 +29,6 @@ describe('Test unit the css minifier methods', () => {
     }).toThrow();
   });
 
-  it('should test css minfier create min file', () => {
-    const testFilePath = './resources/css/create-min-file';
-    createCssMinFile(cssFormatSample, testFilePath);
-    const checkFileExist = fs.existsSync(`${testFilePath}.min.css`);
-    expect(checkFileExist).toBe(true);
-  });
-
   it('should test css create min file return error', () => {
     expect(() => {
       createCssMinFile();
