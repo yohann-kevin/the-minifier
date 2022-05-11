@@ -10,13 +10,14 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -27,19 +28,18 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm test
-
-    coverage:
-      needs: [ test ]
-      name: coverage
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
-        with:
-          node-version: [16.x]
-      - run: npm test
-      - uses: paambaati/codeclimate-action@v2.2.4
-        env:
-          CC_TEST_REPORTER_ID: b8fd8d4688920196c32a5cd9512e2c9f4d0ca6807a126f8a63c7155d12c511e2
-        with:
-          coverageCommand: npm run coverage
+  coverage:
+    needs: [ test ]
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
+      with:
+        node-version: [16.x]
+    - run: npm test
+    - uses: paambaati/codeclimate-action@v2.2.4
+      env:
+        CC_TEST_REPORTER_ID: b8fd8d4688920196c32a5cd9512e2c9f4d0ca6807a126f8a63c7155d12c511e2
+      with:
+        coverageCommand: npm run coverage
