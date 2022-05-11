@@ -1,6 +1,8 @@
 const fs = require('fs');
 const logger = require('pino')();
 
+const { extractFileName } = require('./utils');
+
 /**
  * read css file with file path
  * @param {string} filesPath path of css file
@@ -44,11 +46,11 @@ function createCssMinFile(cssMinify, filePathAndName) {
  * @param {string} path path of css file
  * @returns {string} path and name of css file without extension
  */
-const extractFileName = (path) => {
-  const pathSplited = path.split('.');
-  pathSplited.pop();
-  return pathSplited[0];
-};
+// const extractFileName = (path) => {
+//   const pathSplited = path.split('.');
+//   pathSplited.pop();
+//   return pathSplited[0];
+// };
 
 /**
  * chore function of css minifier
@@ -67,6 +69,5 @@ module.exports = {
   cssFormatter,
   createCssMinFile,
   readCssFile,
-  extractFileName,
   cssMinifier,
 };

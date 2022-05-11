@@ -2,7 +2,6 @@ const fs = require('fs');
 
 const {
   cssFormatter,
-  extractFileName,
   createCssMinFile,
   readCssFile,
   cssMinifier,
@@ -46,13 +45,6 @@ describe('Test unit the css minifier methods', () => {
   it('should test css Formatter', () => {
     const cssFromat = cssFormatter(cssFileSample);
     expect(cssFromat).toBe(cssFormatSample);
-  });
-
-  it('should test extract path and file name method', () => {
-    const pathWithFileExtension = '/style/index.css';
-    const pathWithoutFileExtension = extractFileName(pathWithFileExtension);
-    const pathExpected = '/style/index';
-    expect(pathWithoutFileExtension).toBe(pathExpected);
   });
 
   it('should test css minifier', () => {

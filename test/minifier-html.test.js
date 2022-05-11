@@ -4,7 +4,6 @@ const {
   htmlFormatter,
   readHtmlFile,
   createHtmlMinFile,
-  extractFileName,
 } = require('../src/minifier-html');
 
 describe('Test the html minifier', () => {
@@ -45,12 +44,5 @@ describe('Test the html minifier', () => {
   it('should test html Formatter', () => {
     const htmlFromat = htmlFormatter(htmlFileSample);
     expect(htmlFromat).toBe(htmlFormatSample);
-  });
-
-  it('should test extract path and file name method', () => {
-    const pathWithFileExtension = '/html/index.html';
-    const pathWithoutFileExtension = extractFileName(pathWithFileExtension);
-    const pathExpected = '/html/index';
-    expect(pathWithoutFileExtension).toBe(pathExpected);
   });
 });
