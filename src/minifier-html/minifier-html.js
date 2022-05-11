@@ -20,6 +20,7 @@ function createHtmlMinFile(htmlMinify, filePathAndName) {
     fs.writeFileSync(`${filePathAndName}.min.html`, htmlMinify);
   } catch (err) {
     logger.error(err);
+    throw err;
   }
 }
 
@@ -28,13 +29,6 @@ const extractFileName = (path) => {
   pathSplited.pop();
   return pathSplited[0];
 };
-
-// const htmlMinifier = async () => {
-//   const html = readHtmlFile();
-//   const htmlMinify = htmlFormatter(html);
-//   logger.info(htmlMinify);
-//   createHtmlMinFile(htmlMinify);
-// };
 
 const htmlMinifier = (htmlFilesPath) => {
   htmlFilesPath.forEach((filePath) => {
@@ -46,7 +40,9 @@ const htmlMinifier = (htmlFilesPath) => {
 };
 
 module.exports = {
-  htmlMinifier,
   htmlFormatter,
   readHtmlFile,
+  createHtmlMinFile,
+  extractFileName,
+  htmlMinifier,
 };
