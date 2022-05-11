@@ -1,5 +1,11 @@
 ## The Minifier
 
+<div align="center">
+
+  [![Maintainability](https://api.codeclimate.com/v1/badges/7210bd2f950466648bc2/maintainability)](https://codeclimate.com/github/yohann-kevin/the-minifier/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/7210bd2f950466648bc2/test_coverage)](https://codeclimate.com/github/yohann-kevin/the-minifier/test_coverage) ![example workflow](https://github.com/yohann-kevin/the-minifier/actions/workflows/node.js.yml/badge.svg)
+
+</div>
+
 The minifier is the new fast, light and easy-to-use minifier to optimize your css files (HTML and Javascript WIP) before deploying your web applications in production
 
 ### Install
