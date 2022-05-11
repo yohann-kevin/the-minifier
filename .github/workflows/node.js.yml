@@ -36,7 +36,8 @@ jobs:
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
-        node-version: [16.x]
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     - run: npm test
     - uses: paambaati/codeclimate-action@v2.2.4
       env:
