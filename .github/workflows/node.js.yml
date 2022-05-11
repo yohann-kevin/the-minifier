@@ -24,6 +24,15 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm test
+    
+    steps:
+      - uses: paambaati/codeclimate-action@v3.0.0
+      - name: coverage
+      env:
+        CC_TEST_REPORTER_ID: <code_climate_reporter_id>
+      with:
+        coverageCommand: npm run coverage
+        debug: true
 
   # coverage:
   #   runs-on: ubuntu-latest
