@@ -29,20 +29,11 @@ jobs:
     - run: npm ci
     - run: npm test
   coverage:
-    needs: [ test ]
-    name: coverage
-    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: '12'
-    - run: npm install -g yarn
-    - run: yarn install
-    - run: yarn build
-    - uses: paambaati/codeclimate-action@v3.0.0
-      env:
-        CC_TEST_REPORTER_ID: b8fd8d4688920196c32a5cd9512e2c9f4d0ca6807a126f8a63c7155d12c511e2
-      with:
-        coverageCommand: yarn run coverage
-        debug: true
+  - name: Publish code coverage
+    uses: paambaati/codeclimate-action@v3.0.0
+    env:
+      CC_TEST_REPORTER_ID: b8fd8d4688920196c32a5cd9512e2c9f4d0ca6807a126f8a63c7155d12c511e2
+    with:
+      coverageCommand: npm run coverage
+      debug: true
