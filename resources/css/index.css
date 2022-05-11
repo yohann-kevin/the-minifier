@@ -35,4 +35,5 @@ article > div {
 .login #preferance {
   width: 50%;
   margin: 0auto;
+  padding: 15px;
 }

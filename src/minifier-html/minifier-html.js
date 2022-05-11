@@ -1,9 +1,9 @@
 const fs = require('fs');
 const logger = require('pino')();
 
-function readHtmlFile() {
+function readHtmlFile(filesPath) {
   try {
-    return fs.readFileSync('./resources/html/index.html', 'utf8');
+    return fs.readFileSync(filesPath, 'utf-8');
   } catch (err) {
     logger.error(err);
     throw err;
@@ -15,19 +15,34 @@ function htmlFormatter(htmlContent) {
   return htmlContent.replace(regex, '').split('  ').join('');
 }
 
-function createHtmlMinFile(htmlMinify) {
+function createHtmlMinFile(htmlMinify, filePathAndName) {
   try {
-    fs.writeFileSync('./resources/html/index.min.html', htmlMinify);
+    fs.writeFileSync(`${filePathAndName}.min.html`, htmlMinify);
   } catch (err) {
     logger.error(err);
   }
 }
 
-const htmlMinifier = async () => {
-  const html = readHtmlFile();
-  const htmlMinify = htmlFormatter(html);
-  logger.info(htmlMinify);
-  createHtmlMinFile(htmlMinify);
+const extractFileName = (path) => {
+  const pathSplited = path.split('.');
+  pathSplited.pop();
+  return pathSplited[0];
+};
+
+// const htmlMinifier = async () => {
+//   const html = readHtmlFile();
+//   const htmlMinify = htmlFormatter(html);
+//   logger.info(htmlMinify);
+//   createHtmlMinFile(htmlMinify);
+// };
+
+const htmlMinifier = (htmlFilesPath) => {
+  htmlFilesPath.forEach((filePath) => {
+    const filesPathAndName = extractFileName(filePath);
+    const html = readHtmlFile(filePath);
+    const htmlMinify = htmlFormatter(html);
+    createHtmlMinFile(htmlMinify, filesPathAndName);
+  });
 };
 
 module.exports = {
