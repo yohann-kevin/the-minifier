@@ -40,16 +40,11 @@ jobs:
       with:
         coverageCommand: npm run coverage
         debug: true
-
-on:
-  push:
-    branches: [ master ]
-
-jobs:
   publish:
     needs: [ coverage ]
     name: publish to npm
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
     steps:
         uses: actions/checkout@v3
         uses: actions/setup-node@v3
