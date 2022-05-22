@@ -5,7 +5,7 @@
   "keywords": ["minify", "css"],
   "main": "index.js",
   "scripts": {
-    "lint": "npx eslint index.js",
+    "lint": "npx eslint *.js src/*.js bin/*.js",
     "test": "npx jest --collectCoverage",
     "coverage": "npx jest --collect-coverage"
   },
