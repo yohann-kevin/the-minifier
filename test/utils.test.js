@@ -25,12 +25,6 @@ describe('Test the html minifier', () => {
     expect(checkFileExist).toBe(true);
   });
 
-  it('should test error in method for create min file', () => {
-    expect(() => {
-      createMinFile(null, './', '.txt');
-    }).toThrow();
-  });
-
   it('should test method for read file', () => {
     const fileRead = readFile(filePathSample);
     expect(fileRead).toBe(htmlFormatSample);
