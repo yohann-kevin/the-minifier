@@ -11,6 +11,12 @@ const { minifierCommandLine } = require('../index');
 
 const optionList = [
   {
+    name: 'help',
+    alias: 'h',
+    type: Boolean,
+    description: '🆘 Print this usage guide',
+  },
+  {
     name: 'all',
     alias: 'a',
     defaultOption: true,
