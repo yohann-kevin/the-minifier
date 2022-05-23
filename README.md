@@ -19,7 +19,7 @@ npm install the-minifier
 to see the available order list
 
 ```bash
-the-minifier -h
+the-minifier
 ```
 
 you can get all the commands available via the minifier
@@ -33,6 +33,8 @@ you can get all the commands available via the minifier
 
   -a, --all string   📝 Minify all project
   -c, --css string   🖌️  Minify all project css
+  -w, --html string   🌐 Minify all project html
+  -j, --js string   🚂 Minify all project javascript
 ```
 
 Other languages such as html and javascript will be available in future iterations
@@ -48,6 +50,24 @@ the-minifier --css
 imagine your css file is in a style folder like this: `./style/index.css`
 
 after using the command mentioned above you will see in this style folder a new file in this format: `./style/index.min.css`
+
+the system is the same with html or javascript
+
+if you want to minify the html of your project type the following command
+
+```bash
+the-minifier --html
+```
+
+you will see `*.min.html` files appear
+
+same for javascript
+
+```bash
+the-minifier --js
+```
+
+you will see `*.min.js` files appear
 
 
 ### Bugs
