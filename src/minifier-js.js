@@ -68,5 +68,6 @@ const jsMinifier = (jsFilesPath) => {
 module.exports = {
   jsFormatter,
   readJsFile,
+  removeCommentInJs,
   jsMinifier,
 };

@@ -29,12 +29,6 @@ describe('Test unit the css minifier methods', () => {
     }).toThrow();
   });
 
-  it('should test css create min file return error', () => {
-    expect(() => {
-      createCssMinFile();
-    }).toThrow();
-  });
-
   it('should test css Formatter', () => {
     const cssFromat = cssFormatter(cssFileSample);
     expect(cssFromat).toBe(cssFormatSample);
