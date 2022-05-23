@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 const fs = require('fs');
 const logger = require('pino')();
 
