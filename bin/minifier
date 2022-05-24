@@ -41,6 +41,12 @@ const optionList = [
     type: String,
     description: '🚂 Minify all project javascript',
   },
+  {
+    name: 'ts',
+    alias: 't',
+    type: String,
+    description: '🚆 Minify all project typescript',
+  },
 ];
 
 const usageNotes = [
@@ -55,6 +61,7 @@ const usageNotes = [
 ];
 
 const usage = commandLineUsage(usageNotes);
+const tsFilesPath = [];
 const jsFilesPath = [];
 const cssFilesPath = [];
 const htmlFilesPath = [];
@@ -66,6 +73,20 @@ let options = null;
  * search file in project
  * @param {array} allPath array of all path in project
  */
+function searchTsFile(allPath) {
+  allPath.children.forEach((folderAndFiles) => {
+    if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
+      if (Object.keys(folderAndFiles).length === 2) {
+        const filesName = folderAndFiles.name.split('.');
+        const filesExtension = filesName[filesName.length - 1];
+        if (filesExtension === 'ts') tsFilesPath.push(folderAndFiles.path);
+      } else {
+        searchTsFile(folderAndFiles);
+      }
+    }
+  });
+}
+
 function searchJsFile(allPath) {
   allPath.children.forEach((folderAndFiles) => {
     if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
@@ -129,6 +150,11 @@ function searchPathFile() {
   if (options.js) {
     searchJsFile(projectPath);
     options.jsPath = jsFilesPath;
+  }
+
+  if (options.ts) {
+    searchTsFile(projectPath);
+    options.tsPath = tsFilesPath;
   }
 
   // launch minifier
