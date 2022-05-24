@@ -18,13 +18,27 @@ const extractFileName = (path) => {
  * @param {string} filePathAndName path and name of filesPath
  * @param {string} extension extension files css // html
  */
-function createMinFile(contentMinify, filePathAndName, extension) {
+const createMinFile = (contentMinify, filePathAndName, extension) => {
   try {
     fs.writeFileSync(`${filePathAndName}.min${extension}`, contentMinify);
   } catch (err) {
     logger.error(err);
     throw err;
   }
-}
+};
 
-module.exports = { extractFileName, createMinFile };
+/**
+ * read file with file path
+ * @param {string} filesPath path of file
+ * @returns {string} return cotent in file
+ */
+const readFile = (filesPath) => {
+  try {
+    return fs.readFileSync(filesPath, 'utf8');
+  } catch (err) {
+    logger.error(err);
+    throw err;
+  }
+};
+
+module.exports = { extractFileName, createMinFile, readFile };
