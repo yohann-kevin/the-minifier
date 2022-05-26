@@ -1,6 +1,6 @@
 const { cssMinifier } = require('./src/minifier-css');
 const { htmlMinifier } = require('./src/minifier-html');
-const { jsMinifier } = require('./src/minifier-js');
+const { jsMinifier, tsMinifier } = require('./src/minifier-js');
 
 const minifierCommandLine = (args) => {
   if (args.css) {
@@ -13,6 +13,10 @@ const minifierCommandLine = (args) => {
 
   if (args.js) {
     jsMinifier(args.jsPath);
+  }
+
+  if (args.ts) {
+    tsMinifier(args.tsPath);
   }
 };
 

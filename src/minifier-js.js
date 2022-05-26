@@ -49,8 +49,23 @@ const jsMinifier = (jsFilesPath) => {
   });
 };
 
+/**
+ * chore function of ts minifier
+ * @param {Array} jsFilesPath path of ts files in project
+ */
+const tsMinifier = (jsFilesPath) => {
+  jsFilesPath.forEach((filePath) => {
+    const filePathAndName = extractFileName(filePath);
+    const js = readFile(filePath);
+    const jsMinify = jsFormatter(js);
+    const fileExtension = '.ts';
+    createMinFile(jsMinify, filePathAndName, fileExtension);
+  });
+};
+
 module.exports = {
   jsFormatter,
   removeCommentInJs,
   jsMinifier,
+  tsMinifier,
 };
