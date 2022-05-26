@@ -35,6 +35,7 @@ you can get all the commands available via the minifier
   -c, --css string   🖌️  Minify all project css
   -w, --html string   🌐 Minify all project html
   -j, --js string   🚂 Minify all project javascript
+  -t, --ts string     🚆 Minify all project typescript
 ```
 
 Other languages such as html and javascript will be available in future iterations
@@ -69,6 +70,11 @@ the-minifier --js
 
 you will see `*.min.js` files appear
 
+the application now supports `typescript` in addition to javascript
+
+```bash
+the-minifier --ts
+```
 
 ### Bugs
 
