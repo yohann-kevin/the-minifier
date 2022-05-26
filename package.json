@@ -10,7 +10,7 @@
     "coverage": "npx jest --collect-coverage"
   },
   "bin": {
-    "the-minifier": "bin/minifier"
+    "the-minifier": "bin/minifier.js"
   },
   "author": "PERRIGUEY Yohann <yo44prg@icoud.com> (https://github.com/yohann-kevin)",
   "license": "ISC",
