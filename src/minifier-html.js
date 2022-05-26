@@ -1,26 +1,23 @@
-const fs = require('fs');
-const logger = require('pino')();
+const { extractFileName, createMinFile, readFile } = require('./utils');
 
-const { extractFileName, createMinFile } = require('./utils');
-
-function readHtmlFile(filesPath) {
-  try {
-    return fs.readFileSync(filesPath, 'utf-8');
-  } catch (err) {
-    logger.error(err);
-    throw err;
-  }
-}
-
-function htmlFormatter(htmlContent) {
+/**
+ * minify html content
+ * @param {string} htmlContent content in html file
+ * @returns {string} return html content minify
+ */
+const htmlFormatter = (htmlContent) => {
   const regex = /(\sr\n|\n|\r)/gm;
   return htmlContent.replace(regex, '').split('  ').join('');
-}
+};
 
+/**
+ * chore function of html minifier
+ * @param {Array} htmlFilesPath path of html files in project
+ */
 const htmlMinifier = (htmlFilesPath) => {
   htmlFilesPath.forEach((filePath) => {
     const filesPathAndName = extractFileName(filePath);
-    const html = readHtmlFile(filePath);
+    const html = readFile(filePath);
     const htmlMinify = htmlFormatter(html);
     const fileExtension = '.html';
     createMinFile(htmlMinify, filesPathAndName, fileExtension);
@@ -29,6 +26,5 @@ const htmlMinifier = (htmlFilesPath) => {
 
 module.exports = {
   htmlFormatter,
-  readHtmlFile,
   htmlMinifier,
 };

@@ -1,16 +1,16 @@
 {
   "name": "the-minifier",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "A light library to minify css easily",
   "keywords": ["minify", "css"],
   "main": "index.js",
   "scripts": {
-    "lint": "npx eslint index.js",
+    "lint": "npx eslint *.js src/*.js bin/*.js",
     "test": "npx jest --collectCoverage",
     "coverage": "npx jest --collect-coverage"
   },
   "bin": {
-    "the-minifier": "bin/minifier"
+    "the-minifier": "bin/minifier.js"
   },
   "author": "PERRIGUEY Yohann <yo44prg@icoud.com> (https://github.com/yohann-kevin)",
   "license": "ISC",

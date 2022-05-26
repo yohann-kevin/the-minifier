@@ -2,8 +2,6 @@ const fs = require('fs');
 
 const {
   cssFormatter,
-  createCssMinFile,
-  readCssFile,
   cssMinifier,
 } = require('../src/minifier-css');
 
@@ -16,23 +14,6 @@ describe('Test unit the css minifier methods', () => {
   beforeEach(() => {
     cssFileSample = fs.readFileSync(filePath, 'utf8');
     cssFormatSample = fs.readFileSync('./resources/css/index.min.css', 'utf-8');
-  });
-
-  it('should test css file reader', () => {
-    const fileRead = readCssFile(filePath);
-    expect(fileRead).toBe(cssFileSample);
-  });
-
-  it('should test css file reader error', () => {
-    expect(() => {
-      readCssFile('./');
-    }).toThrow();
-  });
-
-  it('should test css create min file return error', () => {
-    expect(() => {
-      createCssMinFile();
-    }).toThrow();
   });
 
   it('should test css Formatter', () => {

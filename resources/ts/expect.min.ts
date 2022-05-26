@@ -1,0 +1,1 @@
+ function mutliply(a: number, b: number) {}function increment(a: number, i: number) {if (i === a) {return i * a;}return a += i;}function substract(a: number, b: number) {return a - b;}
