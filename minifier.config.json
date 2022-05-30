@@ -1,0 +1,12 @@
+{
+  "dist": true,
+  "language": {
+    "typescript": true,
+    "javascript": true,
+    "html": true,
+    "css": true
+  },
+  "exclude": [
+    "./test/*"
+  ]
+}
