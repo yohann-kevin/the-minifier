@@ -52,7 +52,7 @@ const optionList = [
     name: 'config',
     alias: 'c',
     type: String,
-    description: 'description',
+    description: '⚙️ Use configuration files for minify',
   },
 ];
 
