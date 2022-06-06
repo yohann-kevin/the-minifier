@@ -5,6 +5,7 @@
 const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
 const dirTree = require('directory-tree');
+const fs = require('fs');
 
 // path for development mode
 const { minifierCommandLine } = require('../index');
@@ -25,7 +26,7 @@ const optionList = [
   },
   {
     name: 'css',
-    alias: 'c',
+    alias: 's',
     type: String,
     description: '🖌️  Minify all project css',
   },
@@ -46,6 +47,12 @@ const optionList = [
     alias: 't',
     type: String,
     description: '🚆 Minify all project typescript',
+  },
+  {
+    name: 'config',
+    alias: 'c',
+    type: String,
+    description: 'description',
   },
 ];
 
@@ -131,6 +138,15 @@ function searchHtmlFile(allPath) {
 
 // TODO: end todo
 
+function findConfigFile() {
+  try {
+    return JSON.parse(fs.readFileSync('./minifier.config.json', 'utf-8'));
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 /**
  * search file path
  */
@@ -155,6 +171,10 @@ function searchPathFile() {
   if (options.ts) {
     searchTsFile(projectPath);
     options.tsPath = tsFilesPath;
+  }
+
+  if (options.config) {
+    options.config = findConfigFile();
   }
 
   // launch minifier
