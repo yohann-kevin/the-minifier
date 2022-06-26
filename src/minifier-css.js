@@ -1,4 +1,6 @@
-const { extractFileName, createMinFile, readFile } = require('./utils');
+const {
+  extractFileName, createMinFile, overwriteFile, readFile,
+} = require('./utils');
 
 /**
  * minify css content
@@ -13,14 +15,19 @@ const cssFormatter = (cssContent) => {
 /**
  * chore function of css minifier
  * @param {Array} cssFilesPath path of css files in project
+ * @param {Boolean} nomin manage no min file options
  */
-const cssMinifier = (cssFilesPath) => {
+const cssMinifier = (cssFilesPath, nomin) => {
   cssFilesPath.forEach((filePath) => {
     const filePathAndName = extractFileName(filePath);
     const css = readFile(filePath);
     const cssMinify = cssFormatter(css);
     const fileExtension = '.css';
-    createMinFile(cssMinify, filePathAndName, fileExtension);
+    if (nomin) {
+      overwriteFile(cssMinify, filePathAndName, fileExtension);
+    } else {
+      createMinFile(cssMinify, filePathAndName, fileExtension);
+    }
   });
 };
 
