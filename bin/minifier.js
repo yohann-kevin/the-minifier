@@ -51,7 +51,7 @@ const optionList = [
     name: 'no-min',
     alias: 'n',
     type: Boolean,
-    description: '❌ Does not generate a .min file but overwrites existing files'
+    description: '❌ Does not generate a .min file but overwrites existing files',
   },
 ];
 
@@ -143,8 +143,9 @@ function searchHtmlFile(allPath) {
 function searchPathFile() {
   const projectPath = dirTree('./');
   const nomin = !!options['no-min'];
+  options.nomin = nomin;
 
-  console.log(nomin);
+  if (nomin) delete options['no-min'];
 
   if (options.css) {
     searchCssFile(projectPath);

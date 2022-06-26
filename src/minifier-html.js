@@ -1,4 +1,6 @@
-const { extractFileName, createMinFile, readFile } = require('./utils');
+const {
+  extractFileName, createMinFile, overwriteFile, readFile,
+} = require('./utils');
 
 /**
  * minify html content
@@ -13,14 +15,19 @@ const htmlFormatter = (htmlContent) => {
 /**
  * chore function of html minifier
  * @param {Array} htmlFilesPath path of html files in project
+ * @param {Boolean} nomin manage no min file options
  */
-const htmlMinifier = (htmlFilesPath) => {
+const htmlMinifier = (htmlFilesPath, nomin) => {
   htmlFilesPath.forEach((filePath) => {
     const filesPathAndName = extractFileName(filePath);
     const html = readFile(filePath);
     const htmlMinify = htmlFormatter(html);
     const fileExtension = '.html';
-    createMinFile(htmlMinify, filesPathAndName, fileExtension);
+    if (nomin) {
+      overwriteFile(htmlMinify, filesPathAndName, fileExtension);
+    } else {
+      createMinFile(htmlMinify, filesPathAndName, fileExtension);
+    }
   });
 };
 

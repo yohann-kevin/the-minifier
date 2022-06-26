@@ -28,6 +28,21 @@ const createMinFile = (contentMinify, filePathAndName, extension) => {
 };
 
 /**
+ * Delete and rewrite files with content minify
+ * @param {string} contentMinify css content minify
+ * @param {string} filePathAndName path and name of filesPath
+ * @param {string} extension extension files css // html
+ */
+const overwriteFile = (contentMinify, filePathAndName, extension) => {
+  try {
+    fs.writeFileSync(`${filePathAndName}${extension}`, contentMinify);
+  } catch (err) {
+    logger.error(err);
+    throw err;
+  }
+};
+
+/**
  * read file with file path
  * @param {string} filesPath path of file
  * @returns {string} return cotent in file
@@ -41,4 +56,9 @@ const readFile = (filesPath) => {
   }
 };
 
-module.exports = { extractFileName, createMinFile, readFile };
+module.exports = {
+  extractFileName,
+  createMinFile,
+  overwriteFile,
+  readFile,
+};
