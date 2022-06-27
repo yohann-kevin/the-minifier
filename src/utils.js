@@ -56,9 +56,49 @@ const readFile = (filesPath) => {
   }
 };
 
+/**
+ * Check if file match with extension
+ * @param {Object} filesInformation information of files contain name and path
+ * @param {string} extension extension of file for match
+ * @returns return file path if etension match else return false for not push path in array
+ */
+const checkFileExtension = (filesInformation, extension) => {
+  const filesName = filesInformation.name.split('.');
+  const filesExtension = filesName[filesName.length - 1];
+  if (filesExtension === extension) return filesInformation.path;
+  return false;
+};
+
+/**
+ * return all file path sorted by extension
+ * @param {Object} allPath object of all path in project contain name, path and children
+ * @param {string} extension file extension
+ * @returns {Array} all file path sorted by extension
+ */
+const searchFilePathByExtension = (allPath, extension) => {
+  const allFilePathByExtension = [];
+
+  const searchFile = (filesPath) => {
+    filesPath.children.forEach((folderAndFiles) => {
+      if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
+        if (Object.keys(folderAndFiles).length === 2) {
+          const pathFileGoodExtension = checkFileExtension(folderAndFiles, extension);
+          if (pathFileGoodExtension) allFilePathByExtension.push(pathFileGoodExtension);
+        } else {
+          searchFile(folderAndFiles);
+        }
+      }
+    });
+  };
+
+  searchFile(allPath);
+  return allFilePathByExtension;
+};
+
 module.exports = {
   extractFileName,
   createMinFile,
   overwriteFile,
   readFile,
+  searchFilePathByExtension,
 };
