@@ -13,29 +13,19 @@ const extractFileName = (path) => {
 };
 
 /**
- * create new fileName.min.{exention}
+ * create new fileName.{exention}
  * @param {string} contentMinify css content minify
  * @param {string} filePathAndName path and name of filesPath
  * @param {string} extension extension files css // html
+ * @param {boolean} nomin is nomin is true add .min before extension
  */
-const createMinFile = (contentMinify, filePathAndName, extension) => {
+const createFile = (contentMinify, filePathAndName, extension, nomin) => {
   try {
-    fs.writeFileSync(`${filePathAndName}.min${extension}`, contentMinify);
-  } catch (err) {
-    logger.error(err);
-    throw err;
-  }
-};
-
-/**
- * Delete and rewrite files with content minify
- * @param {string} contentMinify css content minify
- * @param {string} filePathAndName path and name of filesPath
- * @param {string} extension extension files css // html
- */
-const overwriteFile = (contentMinify, filePathAndName, extension) => {
-  try {
-    fs.writeFileSync(`${filePathAndName}${extension}`, contentMinify);
+    if (nomin) {
+      fs.writeFileSync(`${filePathAndName}${extension}`, contentMinify);
+    } else {
+      fs.writeFileSync(`${filePathAndName}.min${extension}`, contentMinify);
+    }
   } catch (err) {
     logger.error(err);
     throw err;
@@ -97,8 +87,7 @@ const searchFilePathByExtension = (allPath, extension) => {
 
 module.exports = {
   extractFileName,
-  createMinFile,
-  overwriteFile,
+  createFile,
   readFile,
   searchFilePathByExtension,
 };
