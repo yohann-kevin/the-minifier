@@ -21,10 +21,18 @@ describe('Test unit the css minifier methods', () => {
     expect(cssFromat).toBe(cssFormatSample);
   });
 
-  it('should test css minifier', () => {
+  it('should test css minifier without nomin options', () => {
     const pathTestFile = 'resources/css/test.css';
     const cssContentExpected = fs.readFileSync('./resources/css/test.min.css', 'utf-8');
-    cssMinifier([pathTestFile]);
+    cssMinifier([pathTestFile], false);
+    const cssContentAfterMinify = fs.readFileSync('./resources/css/test.min.css', 'utf-8');
+    expect(cssContentAfterMinify).toBe(cssContentExpected);
+  });
+
+  it('should test css minifier with nomin options', () => {
+    const pathTestFile = 'resources/css/test.css';
+    const cssContentExpected = fs.readFileSync('./resources/css/test.min.css', 'utf-8');
+    cssMinifier([pathTestFile], true);
     const cssContentAfterMinify = fs.readFileSync('./resources/css/test.min.css', 'utf-8');
     expect(cssContentAfterMinify).toBe(cssContentExpected);
   });
