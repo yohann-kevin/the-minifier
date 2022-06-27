@@ -6,6 +6,7 @@ const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
 const dirTree = require('directory-tree');
 const pjson = require('../package.json');
+const { searchFilePathByExtension } = require('../src/utils');
 
 // path for development mode
 const { minifierCommandLine } = require('../index');
@@ -73,75 +74,7 @@ const usageNotes = [
 ];
 
 const usage = commandLineUsage(usageNotes);
-const tsFilesPath = [];
-const jsFilesPath = [];
-const cssFilesPath = [];
-const htmlFilesPath = [];
-let options = null;
-
-// TODO: refactor recursive method for search file path
-
-/**
- * search file in project
- * @param {array} allPath array of all path in project
- */
-function searchTsFile(allPath) {
-  allPath.children.forEach((folderAndFiles) => {
-    if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
-      if (Object.keys(folderAndFiles).length === 2) {
-        const filesName = folderAndFiles.name.split('.');
-        const filesExtension = filesName[filesName.length - 1];
-        if (filesExtension === 'ts') tsFilesPath.push(folderAndFiles.path);
-      } else {
-        searchTsFile(folderAndFiles);
-      }
-    }
-  });
-}
-
-function searchJsFile(allPath) {
-  allPath.children.forEach((folderAndFiles) => {
-    if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
-      if (Object.keys(folderAndFiles).length === 2) {
-        const filesName = folderAndFiles.name.split('.');
-        const filesExtension = filesName[filesName.length - 1];
-        if (filesExtension === 'js') jsFilesPath.push(folderAndFiles.path);
-      } else {
-        searchJsFile(folderAndFiles);
-      }
-    }
-  });
-}
-
-function searchCssFile(allPath) {
-  allPath.children.forEach((folderAndFiles) => {
-    if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
-      if (Object.keys(folderAndFiles).length === 2) {
-        const filesName = folderAndFiles.name.split('.');
-        const filesExtension = filesName[filesName.length - 1];
-        if (filesExtension === 'css') cssFilesPath.push(folderAndFiles.path);
-      } else {
-        searchCssFile(folderAndFiles);
-      }
-    }
-  });
-}
-
-function searchHtmlFile(allPath) {
-  allPath.children.forEach((folderAndFiles) => {
-    if (folderAndFiles.name !== 'node_modules' && folderAndFiles.name !== '.git') {
-      if (Object.keys(folderAndFiles).length === 2) {
-        const filesName = folderAndFiles.name.split('.');
-        const filesExtension = filesName[filesName.length - 1];
-        if (filesExtension === 'html') htmlFilesPath.push(folderAndFiles.path);
-      } else {
-        searchHtmlFile(folderAndFiles);
-      }
-    }
-  });
-}
-
-// TODO: end todo
+let options = {};
 
 /**
  * search file path
@@ -154,23 +87,19 @@ function searchPathFile() {
   if (nomin) delete options['no-min'];
 
   if (options.css) {
-    searchCssFile(projectPath);
-    options.cssPath = cssFilesPath;
+    options.cssPath = searchFilePathByExtension(projectPath, 'css');
   }
 
   if (options.html) {
-    searchHtmlFile(projectPath);
-    options.htmlPath = htmlFilesPath;
+    options.htmlPath = searchFilePathByExtension(projectPath, 'html');
   }
 
   if (options.js) {
-    searchJsFile(projectPath);
-    options.jsPath = jsFilesPath;
+    options.jsPath = searchFilePathByExtension(projectPath, 'js');
   }
 
   if (options.ts) {
-    searchTsFile(projectPath);
-    options.tsPath = tsFilesPath;
+    options.tsPath = searchFilePathByExtension(projectPath, 'ts');
   }
 
   // launch minifier

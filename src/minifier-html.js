@@ -1,5 +1,5 @@
 const {
-  extractFileName, createMinFile, overwriteFile, readFile,
+  extractFileName, createFile, readFile,
 } = require('./utils');
 
 /**
@@ -23,11 +23,7 @@ const htmlMinifier = (htmlFilesPath, nomin) => {
     const html = readFile(filePath);
     const htmlMinify = htmlFormatter(html);
     const fileExtension = '.html';
-    if (nomin) {
-      overwriteFile(htmlMinify, filesPathAndName, fileExtension);
-    } else {
-      createMinFile(htmlMinify, filesPathAndName, fileExtension);
-    }
+    createFile(htmlMinify, filesPathAndName, fileExtension, nomin);
   });
 };
 

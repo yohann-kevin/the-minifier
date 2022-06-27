@@ -1,5 +1,5 @@
 const {
-  extractFileName, createMinFile, overwriteFile, readFile,
+  extractFileName, createFile, readFile,
 } = require('./utils');
 
 /**
@@ -23,11 +23,7 @@ const cssMinifier = (cssFilesPath, nomin) => {
     const css = readFile(filePath);
     const cssMinify = cssFormatter(css);
     const fileExtension = '.css';
-    if (nomin) {
-      overwriteFile(cssMinify, filePathAndName, fileExtension);
-    } else {
-      createMinFile(cssMinify, filePathAndName, fileExtension);
-    }
+    createFile(cssMinify, filePathAndName, fileExtension, nomin);
   });
 };
 
