@@ -5,6 +5,7 @@
 const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
 const dirTree = require('directory-tree');
+const pjson = require('../package.json');
 
 // path for development mode
 const { minifierCommandLine } = require('../index');
@@ -19,33 +20,44 @@ const optionList = [
   {
     name: 'all',
     alias: 'a',
-    defaultOption: true,
-    typeLabel: '{underline string}',
+    type: Boolean,
     description: '📝 Minify all project',
   },
   {
     name: 'css',
     alias: 'c',
-    type: String,
-    description: '🖌️  Minify all project css',
+    type: Boolean,
+    description: '🖌️ Minify all project css',
   },
   {
     name: 'html',
     alias: 'w',
-    type: String,
+    type: Boolean,
     description: '🌐 Minify all project html',
   },
   {
     name: 'js',
     alias: 'j',
-    type: String,
+    type: Boolean,
     description: '🚂 Minify all project javascript',
   },
   {
     name: 'ts',
     alias: 't',
-    type: String,
+    type: Boolean,
     description: '🚆 Minify all project typescript',
+  },
+  {
+    name: 'no-min',
+    alias: 'n',
+    type: Boolean,
+    description: '❌ Does not generate a .min file but overwrites existing files',
+  },
+  {
+    name: 'version',
+    alias: 'v',
+    type: Boolean,
+    description: '🔍 View current install version',
   },
 ];
 
@@ -136,6 +148,10 @@ function searchHtmlFile(allPath) {
  */
 function searchPathFile() {
   const projectPath = dirTree('./');
+  const nomin = !!options['no-min'];
+  options.nomin = nomin;
+
+  if (nomin) delete options['no-min'];
 
   if (options.css) {
     searchCssFile(projectPath);
@@ -202,6 +218,9 @@ function init() {
 
   if (Object.keys(options).length === 0 || options.help) {
     console.log(usage);
+  } else if (options.version) {
+    const versionMsg = `the-minifier ${pjson.version}`;
+    console.log(versionMsg);
   } else {
     initArgsValue();
   }

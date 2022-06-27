@@ -1,7 +1,9 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 
-const { extractFileName, createMinFile, readFile } = require('./utils');
+const {
+  extractFileName, createMinFile, overwriteFile, readFile,
+} = require('./utils');
 
 /**
  * remove comment in javascript content
@@ -38,28 +40,38 @@ const jsFormatter = (jsContent) => {
 /**
  * chore function of js minifier
  * @param {Array} jsFilesPath path of js files in project
+ * @param {Boolean} nomin manage no min file options
  */
-const jsMinifier = (jsFilesPath) => {
+const jsMinifier = (jsFilesPath, nomin) => {
   jsFilesPath.forEach((filePath) => {
     const filePathAndName = extractFileName(filePath);
     const js = readFile(filePath);
     const jsMinify = jsFormatter(js);
     const fileExtension = '.js';
-    createMinFile(jsMinify, filePathAndName, fileExtension);
+    if (nomin) {
+      overwriteFile(jsMinify, filePathAndName, fileExtension);
+    } else {
+      createMinFile(jsMinify, filePathAndName, fileExtension);
+    }
   });
 };
 
 /**
  * chore function of ts minifier
  * @param {Array} jsFilesPath path of ts files in project
+ * @param {Boolean} nomin manage no min file options
  */
-const tsMinifier = (jsFilesPath) => {
+const tsMinifier = (jsFilesPath, nomin) => {
   jsFilesPath.forEach((filePath) => {
     const filePathAndName = extractFileName(filePath);
     const js = readFile(filePath);
     const jsMinify = jsFormatter(js);
     const fileExtension = '.ts';
-    createMinFile(jsMinify, filePathAndName, fileExtension);
+    if (nomin) {
+      overwriteFile(jsMinify, filePathAndName, fileExtension);
+    } else {
+      createMinFile(jsMinify, filePathAndName, fileExtension);
+    }
   });
 };
 

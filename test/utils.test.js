@@ -1,6 +1,9 @@
 const fs = require('fs');
 
-const { extractFileName, createMinFile, readFile } = require('../src/utils');
+const {
+  extractFileName, createMinFile, readFile, overwriteFile,
+} = require('../src/utils');
+const { htmlFormatter } = require('../src/minifier-html');
 
 describe('Test the html minifier', () => {
   const filePathSample = './resources/html/index.min.html';
@@ -22,7 +25,16 @@ describe('Test the html minifier', () => {
     const testFilePath = './resources/html/create-min-file';
     createMinFile(htmlFormatSample, testFilePath, '.html');
     const checkFileExist = fs.existsSync(`${testFilePath}.min.html`);
-    expect(checkFileExist).toBe(true);
+    expect(checkFileExist).toBeTruthy();
+  });
+
+  it('should test method for overwrite files', () => {
+    const content = fs.readFileSync('./resources/html/content.html', 'utf-8');
+    const contentMinified = htmlFormatter(content);
+    const testFilePath = './resources/html/over-write';
+    overwriteFile(contentMinified, testFilePath, '.html');
+    const checkFileExist = fs.existsSync(`${testFilePath}.html`);
+    expect(checkFileExist).toBeTruthy();
   });
 
   it('should test method for read file', () => {

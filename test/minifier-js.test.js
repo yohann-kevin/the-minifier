@@ -23,14 +23,26 @@ describe('Test unit the js minifier methods', () => {
     expect(jsFormat).toBe(jsFormatSample);
   });
 
-  it('should test js minifier', () => {
-    jsMinifier([jsFilePathSample]);
+  it('should test js minifier without nomin options', () => {
+    jsMinifier([jsFilePathSample], false);
     const jsContentAfterMinify = fs.readFileSync('./resources/js/expect.min.js', 'utf-8');
     expect(jsContentAfterMinify).toBe(jsFormatSample);
   });
 
-  it('should test ts minifier for typescript', () => {
-    tsMinifier([tsFilePathSample]);
+  it('should test js minifier with nomin options', () => {
+    jsMinifier([jsFilePathSample], true);
+    const jsContentAfterMinify = fs.readFileSync('./resources/js/expect.min.js', 'utf-8');
+    expect(jsContentAfterMinify).toBe(jsFormatSample);
+  });
+
+  it('should test ts minifier for typescript without nomin options', () => {
+    tsMinifier([tsFilePathSample], false);
+    const tsContentAfterMinify = fs.readFileSync('./resources/ts/expect.min.ts', 'utf-8');
+    expect(tsContentAfterMinify).toBe(tsFormatSample);
+  });
+
+  it('should test ts minifier for typescript with nomin options', () => {
+    tsMinifier([tsFilePathSample], true);
     const tsContentAfterMinify = fs.readFileSync('./resources/ts/expect.min.ts', 'utf-8');
     expect(tsContentAfterMinify).toBe(tsFormatSample);
   });
