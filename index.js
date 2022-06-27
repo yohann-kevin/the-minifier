@@ -9,6 +9,8 @@ const minifierCommandLine = (args) => {
 
   if (args.html) {
     htmlMinifier(args.htmlPath, args.nomin);
+
+    
   }
 
   if (args.js) {
