@@ -40,7 +40,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm lint
+    - run: npm run lint
   coverage:
     needs: [ lint ]
     name: coverage
