@@ -5,6 +5,7 @@
 const commandLineUsage = require('command-line-usage');
 const commandLineArgs = require('command-line-args');
 const dirTree = require('directory-tree');
+const pjson = require('../package.json');
 
 // path for development mode
 const { minifierCommandLine } = require('../index');
@@ -51,6 +52,12 @@ const optionList = [
     alias: 'n',
     type: Boolean,
     description: '❌ Does not generate a .min file but overwrites existing files',
+  },
+  {
+    name: 'version',
+    alias: 'v',
+    type: Boolean,
+    description: '🔍 View current install version',
   },
 ];
 
@@ -211,6 +218,9 @@ function init() {
 
   if (Object.keys(options).length === 0 || options.help) {
     console.log(usage);
+  } else if (options.version) {
+    const versionMsg = `the-minifier ${pjson.version}`;
+    console.log(versionMsg);
   } else {
     initArgsValue();
   }

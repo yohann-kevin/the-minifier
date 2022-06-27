@@ -14,6 +14,18 @@ The minifier is the new fast, light and easy-to-use minifier to optimize your cs
 npm install the-minifier
 ```
 
+Verify package installation
+
+```bash
+the-minifier --version
+```
+
+If your command prompt prints the following line the package is correctly installed
+
+```bash
+the-minifier 1.2.0
+```
+
 ### Usage with cli
 
 to see the available order list
@@ -31,13 +43,14 @@ you can get all the commands available via the minifier
 
 ⚙️  Options ⚙️
 
-  -h, --help      🆘 Print this usage guide                                     
-  -a, --all       📝 Minify all project                                         
-  -c, --css       🖌️ Minify all project css                                    
-  -w, --html      🌐 Minify all project html                                    
-  -j, --js        🚂 Minify all project javascript                              
-  -t, --ts        🚆 Minify all project typescript                              
-  -n, --no-min    ❌ Does not generate a .min file but overwrites existing files
+  -h, --help       🆘 Print this usage guide                                     
+  -a, --all        📝 Minify all project                                         
+  -c, --css        🖌️ Minify all project css                                    
+  -w, --html       🌐 Minify all project html                                    
+  -j, --js         🚂 Minify all project javascript                              
+  -t, --ts         🚆 Minify all project typescript                              
+  -n, --no-min     ❌ Does not generate a .min file but overwrites existing files 
+  -v, --version    🔍 View current install version
 ```
 
 Other languages such as html and javascript will be available in future iterations
