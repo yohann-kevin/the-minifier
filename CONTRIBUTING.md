@@ -47,13 +47,13 @@ if you see this menu appear, you are ready to start developing.
 
 ⚙️  Options ⚙️
 
-  -h, --help         🆘 Print this usage guide                                     
-  -a, --all string   📝 Minify all project                                         
-  -c, --css          🖌️ Minify all project css                                    
-  -w, --html         🌐 Minify all project html                                    
-  -j, --js           🚂 Minify all project javascript                              
-  -t, --ts           🚆 Minify all project typescript                              
-  -n, --no-min       ❌ Does not generate a .min file but overwrites existing files 
+  -h, --help      🆘 Print this usage guide                                     
+  -a, --all       📝 Minify all project                                         
+  -c, --css       🖌️ Minify all project css                                    
+  -w, --html      🌐 Minify all project html                                    
+  -j, --js        🚂 Minify all project javascript                              
+  -t, --ts        🚆 Minify all project typescript                              
+  -n, --no-min    ❌ Does not generate a .min file but overwrites existing files
 ```
 
 ## Workflow

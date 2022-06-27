@@ -27,15 +27,17 @@ you can get all the commands available via the minifier
 ```bash
 🗜️  Minify html, css and javascript
 
-  A light library to minify javascript, css and html easily
+  A light library to minify javascript, css and html easily 
 
 ⚙️  Options ⚙️
 
-  -a, --all string   📝 Minify all project
-  -c, --css string   🖌️  Minify all project css
-  -w, --html string   🌐 Minify all project html
-  -j, --js string   🚂 Minify all project javascript
-  -t, --ts string     🚆 Minify all project typescript
+  -h, --help      🆘 Print this usage guide                                     
+  -a, --all       📝 Minify all project                                         
+  -c, --css       🖌️ Minify all project css                                    
+  -w, --html      🌐 Minify all project html                                    
+  -j, --js        🚂 Minify all project javascript                              
+  -t, --ts        🚆 Minify all project typescript                              
+  -n, --no-min    ❌ Does not generate a .min file but overwrites existing files
 ```
 
 Other languages such as html and javascript will be available in future iterations
@@ -76,6 +78,18 @@ the application now supports `typescript` in addition to javascript
 the-minifier --ts
 ```
 
+If you don't want to create a `.min` file you can use the `--no-min` option in your command.
+
+```bash
+the-minifier --js --no-min
+```
+
+⚠️ Warning this option will overwrite the existing file to recreate it with the minifier content
+
 ### Bugs
 
 If you find a bug please report it on github by creating a new [issues](https://github.com/yohann-kevin/the-minifier/issues).
+
+### Contributing
+
+If you wish to contribute to the project refer to [CONTRIBUTING.md](https://github.com/yohann-kevin/the-minifier/blob/feature/contributing-doc/CONTRIBUTING.md)
