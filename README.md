@@ -213,4 +213,4 @@ If you find a bug please report it on github by creating a new [issues](https://
 
 ### Contributing
 
-If you wish to contribute to the project refer to [CONTRIBUTING.md](https://github.com/yohann-kevin/the-minifier/blob/feature/contributing-doc/CONTRIBUTING.md)
+If you wish to contribute to the project refer to [CONTRIBUTING.md](https://github.com/yohann-kevin/the-minifier/blob/master/CONTRIBUTING.md)
