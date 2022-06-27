@@ -19,8 +19,7 @@ const optionList = [
   {
     name: 'all',
     alias: 'a',
-    defaultOption: true,
-    type: String,
+    type: Boolean,
     description: '📝 Minify all project',
   },
   {
