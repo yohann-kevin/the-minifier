@@ -2,7 +2,7 @@
 /* eslint-disable array-callback-return */
 
 const {
-  extractFileName, createMinFile, overwriteFile, readFile,
+  extractFileName, createFile, readFile,
 } = require('./utils');
 
 /**
@@ -48,11 +48,7 @@ const jsMinifier = (jsFilesPath, nomin) => {
     const js = readFile(filePath);
     const jsMinify = jsFormatter(js);
     const fileExtension = '.js';
-    if (nomin) {
-      overwriteFile(jsMinify, filePathAndName, fileExtension);
-    } else {
-      createMinFile(jsMinify, filePathAndName, fileExtension);
-    }
+    createFile(jsMinify, filePathAndName, fileExtension, nomin);
   });
 };
 
@@ -67,11 +63,7 @@ const tsMinifier = (jsFilesPath, nomin) => {
     const js = readFile(filePath);
     const jsMinify = jsFormatter(js);
     const fileExtension = '.ts';
-    if (nomin) {
-      overwriteFile(jsMinify, filePathAndName, fileExtension);
-    } else {
-      createMinFile(jsMinify, filePathAndName, fileExtension);
-    }
+    createFile(jsMinify, filePathAndName, fileExtension, nomin);
   });
 };
 
