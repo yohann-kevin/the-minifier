@@ -1,6 +1,6 @@
-const { cssMinifier } = require('./src/minifier-css');
-const { htmlMinifier } = require('./src/minifier-html');
-const { jsMinifier, tsMinifier } = require('./src/minifier-js');
+const { cssMinifier, cssFormatter } = require('./src/minifier-css');
+const { htmlMinifier, htmlFormatter } = require('./src/minifier-html');
+const { jsMinifier, tsMinifier, jsFormatter } = require('./src/minifier-js');
 
 const minifierCommandLine = (args) => {
   if (args.css) {
@@ -20,4 +20,13 @@ const minifierCommandLine = (args) => {
   }
 };
 
-module.exports = { minifierCommandLine };
+module.exports = {
+  minifierCommandLine,
+  cssMinifier,
+  htmlMinifier,
+  jsMinifier,
+  tsMinifier,
+  cssFormatter,
+  htmlFormatter,
+  jsFormatter,
+};
