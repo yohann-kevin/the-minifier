@@ -20,32 +20,38 @@ const optionList = [
     name: 'all',
     alias: 'a',
     defaultOption: true,
-    typeLabel: '{underline string}',
+    type: String,
     description: '📝 Minify all project',
   },
   {
     name: 'css',
     alias: 'c',
-    type: String,
-    description: '🖌️  Minify all project css',
+    type: Boolean,
+    description: '🖌️ Minify all project css',
   },
   {
     name: 'html',
     alias: 'w',
-    type: String,
+    type: Boolean,
     description: '🌐 Minify all project html',
   },
   {
     name: 'js',
     alias: 'j',
-    type: String,
+    type: Boolean,
     description: '🚂 Minify all project javascript',
   },
   {
     name: 'ts',
     alias: 't',
-    type: String,
+    type: Boolean,
     description: '🚆 Minify all project typescript',
+  },
+  {
+    name: 'no-min',
+    alias: 'n',
+    type: Boolean,
+    description: '❌ Does not generate a .min file but overwrites existing files',
   },
 ];
 
@@ -136,6 +142,10 @@ function searchHtmlFile(allPath) {
  */
 function searchPathFile() {
   const projectPath = dirTree('./');
+  const nomin = !!options['no-min'];
+  options.nomin = nomin;
+
+  if (nomin) delete options['no-min'];
 
   if (options.css) {
     searchCssFile(projectPath);

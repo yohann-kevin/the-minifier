@@ -21,8 +21,14 @@ describe('Test the html minifier', () => {
     expect(htmlFromat).toBe(htmlFormatSample);
   });
 
-  it('should test js minifier', () => {
-    htmlMinifier([filePath]);
+  it('should test js minifier without nomin options', () => {
+    htmlMinifier([filePath], false);
+    const htmlContentAfterMinify = fs.readFileSync('./resources/html/index.min.html', 'utf-8');
+    expect(htmlContentAfterMinify).toBe(htmlFormatSample);
+  });
+
+  it('should test js minifier with nomin options', () => {
+    htmlMinifier([filePath], true);
     const htmlContentAfterMinify = fs.readFileSync('./resources/html/index.min.html', 'utf-8');
     expect(htmlContentAfterMinify).toBe(htmlFormatSample);
   });

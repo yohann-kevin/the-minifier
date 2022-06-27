@@ -4,19 +4,19 @@ const { jsMinifier, tsMinifier } = require('./src/minifier-js');
 
 const minifierCommandLine = (args) => {
   if (args.css) {
-    cssMinifier(args.cssPath);
+    cssMinifier(args.cssPath, args.nomin);
   }
 
   if (args.html) {
-    htmlMinifier(args.htmlPath);
+    htmlMinifier(args.htmlPath, args.nomin);
   }
 
   if (args.js) {
-    jsMinifier(args.jsPath);
+    jsMinifier(args.jsPath, args.nomin);
   }
 
   if (args.ts) {
-    tsMinifier(args.tsPath);
+    tsMinifier(args.tsPath, args.nomin);
   }
 };
 
