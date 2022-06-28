@@ -6,21 +6,38 @@ const {
 } = require('./utils');
 
 /**
+ * remove one line comment
+ * @param {string} line line of js
+ * @returns {array} arrar of js line without comment
+ */
+const removeOneLineComment = (line) => {
+  const elmntWithoutSpace = line.split(' ').filter((item) => item !== '');
+  const indexOfCommentStart = elmntWithoutSpace.indexOf('//');
+  if (indexOfCommentStart !== 0) {
+    return elmntWithoutSpace.slice(0, indexOfCommentStart).join(' ');
+  }
+};
+
+/**
  * remove comment in javascript content
  * @param {array} jsInline Array of javascript line by line
  * @returns {array} return Array of javascript without comment
  */
 const removeCommentInJs = (jsInline) => {
-  const jsWithoutComment = jsInline.map((elmnt) => {
-    if (elmnt.replace(' ', '')[0] !== '*'
-    && elmnt.split('  ')[0] !== '//'
-    && elmnt !== '/**'
-    && elmnt.split(' ')[0] !== '/*'
-    && elmnt.split(' ')[0] !== '*'
-    && elmnt.split(' ')[1] !== '*/'
-    && elmnt.split('  ').join('').split(' ').indexOf('//') === -1
-    ) {
-      return elmnt.split('  ').join('');
+  let isInMultiLineComment = false;
+
+  const jsWithoutComment = jsInline.map((line) => {
+    if (line.includes('//')) {
+      return removeOneLineComment(line);
+    }
+    if (!line.includes('//')) {
+      // manage multi line comment
+      const commentMultiLineStart = line.includes('/**') || line.split(' ')[0].includes('/*');
+      if (commentMultiLineStart && line.split(' ').indexOf('*/') === -1) isInMultiLineComment = true;
+      if (!commentMultiLineStart) {
+        if (line.split(' ').indexOf('*/') !== -1 && isInMultiLineComment) isInMultiLineComment = false;
+        if (!isInMultiLineComment && line.split(' ').indexOf('*/') === -1) return line.split('  ').join('');
+      }
     }
   });
   return jsWithoutComment;
@@ -69,6 +86,7 @@ const tsMinifier = (jsFilesPath, nomin) => {
 
 module.exports = {
   jsFormatter,
+  removeOneLineComment,
   removeCommentInJs,
   jsMinifier,
   tsMinifier,
