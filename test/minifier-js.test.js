@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const {
-  jsMinifier, jsFormatter, tsMinifier,
+  jsMinifier, jsFormatter, tsMinifier, removeCommentInJs, removeOneLineComment,
 } = require('../src/minifier-js');
 
 describe('Test unit the js minifier methods', () => {
@@ -45,5 +45,79 @@ describe('Test unit the js minifier methods', () => {
     tsMinifier([tsFilePathSample], true);
     const tsContentAfterMinify = fs.readFileSync('./resources/ts/expect.min.ts', 'utf-8');
     expect(tsContentAfterMinify).toBe(tsFormatSample);
+  });
+
+  it('should tets method removeCommentInJs', () => {
+    const jsInlineSample = [
+      '// extract path and name of file',
+      'const extractFileName = (path) => {',
+      "  const pathSplited = path.split('.');",
+      '  pathSplited.pop();',
+      '  return pathSplited[0];',
+      '};',
+      '',
+      '/*',
+      'plop',
+      'plop',
+      '*/',
+      '',
+      '/**',
+      ' * read file with file path',
+      ' * @param {string} filesPath path of file',
+      ' * @returns {string} return cotent in file',
+      ' */',
+      'const readFile = (filesPath) => {',
+      '  try {',
+      "    return fs.readFileSync(filesPath, 'utf8'); // comment inline",
+      '  } catch (err) {',
+      '    logger.error(err);',
+      '    throw err;',
+      '  }',
+      '};',
+    ];
+
+    const jsWithoutCommentExpected = [
+      undefined,
+      'const extractFileName = (path) => {',
+      "const pathSplited = path.split('.');",
+      'pathSplited.pop();',
+      'return pathSplited[0];',
+      '};',
+      '',
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      '',
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      'const readFile = (filesPath) => {',
+      'try {',
+      "return fs.readFileSync(filesPath, 'utf8');",
+      '} catch (err) {',
+      'logger.error(err);',
+      'throw err;',
+      '}',
+      '};',
+    ];
+
+    const jsWithCommentRemoved = removeCommentInJs(jsInlineSample);
+
+    expect(jsWithCommentRemoved).toStrictEqual(jsWithoutCommentExpected);
+  });
+
+  it('should test method removing one line comment', () => {
+    const lineCommentStartSample = '// comment in start of line';
+    const lineCommentMiddleSample = 'return a * b // comment start in line';
+    const lineCommentMiddleExpected = 'return a * b';
+
+    const lineWithCommentStartRemoved = removeOneLineComment(lineCommentStartSample);
+    const lineWithCommentMiddleRemoved = removeOneLineComment(lineCommentMiddleSample);
+
+    expect(lineWithCommentStartRemoved).toBe(undefined);
+    expect(lineWithCommentMiddleRemoved).toBe(lineCommentMiddleExpected);
   });
 });
