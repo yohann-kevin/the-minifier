@@ -1,6 +1,6 @@
 {
   "name": "the-minifier",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A light library to minify css easily",
   "keywords": ["minify", "css"],
   "main": "index.js",
