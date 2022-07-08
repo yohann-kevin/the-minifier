@@ -17,8 +17,9 @@ describe('Test the html minifier', () => {
   });
 
   it('should test html Formatter', () => {
-    const htmlFromat = htmlFormatter(htmlFileSample);
-    expect(htmlFromat).toBe(htmlFormatSample);
+    const htmlFormat = htmlFormatter(htmlFileSample);
+    const htmlFormatExpected = fs.readFileSync('./resources/html/output-fromatter.html', 'utf-8');
+    expect(htmlFormat).toEqual(htmlFormatExpected);
   });
 
   it('should test js minifier without nomin options', () => {

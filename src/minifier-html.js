@@ -1,6 +1,21 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 const {
   extractFileName, createFile, readFile,
 } = require('./utils');
+
+/**
+ * return line without comment
+ * @param {string} line
+ * @returns return line without comment
+ */
+const removeInlineHtmlComment = (line) => {
+  const lineSplitted = line.split(' ');
+  const startComment = lineSplitted.indexOf('<!--');
+  const endComment = lineSplitted.indexOf('-->');
+  lineSplitted.splice(startComment, endComment);
+  return lineSplitted.join(' ');
+};
 
 /**
  * minify html content
@@ -9,7 +24,21 @@ const {
  */
 const htmlFormatter = (htmlContent) => {
   const regex = /(\sr\n|\n|\r)/gm;
-  return htmlContent.replace(regex, '').split('  ').join('');
+  let isMultiLineComment = false;
+
+  const htmlWithoutComment = htmlContent.split('\n').map((line) => {
+    if (line.includes('<!--') && line.includes('-->')) {
+      return removeInlineHtmlComment(line);
+    } if (line.includes('<!--') && !line.includes('-->')) {
+      isMultiLineComment = true;
+    } else if (line.includes('-->')) {
+      isMultiLineComment = false;
+    } else if (!isMultiLineComment) {
+      return line;
+    }
+  });
+
+  return htmlWithoutComment.join('').replace(regex, '').split('  ').join('');
 };
 
 /**
